@@ -3,44 +3,512 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Labib Al Faisal - Portfolio</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Your Name - Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier New', monospace;
+            background: #000;
+            color: #00ff00;
+            overflow-x: hidden;
+            line-height: 1.4;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Terminal Cursor */
+        .cursor {
+            display: inline-block;
+            background: #00ff00;
+            width: 2px;
+            height: 1.2em;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        /* Intro Section */
+        .intro {
+            padding: 60px 0 40px;
+        }
+
+        .terminal-line {
+            margin-bottom: 10px;
+            opacity: 0;
+            animation: fadeIn 0.5s forwards;
+        }
+
+        .terminal-line:nth-child(1) { animation-delay: 0.5s; }
+        .terminal-line:nth-child(2) { animation-delay: 1s; }
+        .terminal-line:nth-child(3) { animation-delay: 2s; }
+        .terminal-line:nth-child(4) { animation-delay: 3s; }
+        .terminal-line:nth-child(5) { animation-delay: 4.5s; }
+
+        .prompt {
+            color: #0099ff;
+        }
+
+        .name {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #00ff00;
+            overflow: hidden;
+            white-space: nowrap;
+            border-right: 2px solid #00ff00;
+            animation: typewriter 2s steps(20) 2s forwards, blinkCursor 1s infinite 2s;
+            width: 0;
+        }
+
+        .title {
+            font-size: 1.5rem;
+            color: #ffff00;
+            overflow: hidden;
+            white-space: nowrap;
+            border-right: 2px solid #ffff00;
+            animation: typewriter 1.5s steps(20) 4s forwards, blinkCursor 1s infinite 4s;
+            width: 0;
+        }
+
+        @keyframes typewriter {
+            to {
+                width: 100%;
+            }
+        }
+
+        @keyframes blinkCursor {
+            0%, 50% { border-color: transparent; }
+            51%, 100% { border-color: currentColor; }
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        /* Skills Section */
+        .skills {
+            padding: 30px 0;
+        }
+
+        .skills .section-header {
+            opacity: 0;
+            animation: fadeIn 0.5s 5.5s forwards;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .skill-category {
+            background: #111;
+            border: 1px solid #333;
+            padding: 15px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: slideUp 0.5s forwards;
+            transition: all 0.3s ease;
+        }
+
+        .skill-category:nth-child(1) { animation-delay: 6s; }
+        .skill-category:nth-child(2) { animation-delay: 6.2s; }
+        .skill-category:nth-child(3) { animation-delay: 6.4s; }
+        .skill-category:nth-child(4) { animation-delay: 6.6s; }
+
+        .skill-category:hover {
+            border-color: #00ff00;
+            background: #0a0a0a;
+        }
+
+        .skill-title {
+            color: #ffff00;
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+
+        .skill-list {
+            color: #ccc;
+            font-size: 0.85rem;
+            line-height: 1.6;
+        }
+
+        .skill-item {
+            display: block;
+            margin-bottom: 3px;
+            transition: color 0.3s ease;
+        }
+
+        .skill-item:hover {
+            color: #00ff00;
+        }
+
+        @keyframes slideUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Projects Section */
+        .projects {
+            padding: 30px 0;
+        }
+
+        .section-header {
+            color: #0099ff;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            opacity: 0;
+            animation: fadeIn 0.5s 7s forwards;
+        }
+
+        .project {
+            margin-bottom: 15px;
+            padding: 15px;
+            border: 1px solid #333;
+            background: #111;
+            opacity: 0;
+            transform: translateX(-20px);
+            animation: slideIn 0.5s forwards;
+            transition: all 0.3s ease;
+        }
+
+        .project:nth-child(2) { animation-delay: 7.5s; }
+        .project:nth-child(3) { animation-delay: 7.8s; }
+        .project:nth-child(4) { animation-delay: 8.1s; }
+
+        .project:hover {
+            background: #222;
+            border-color: #00ff00;
+            transform: translateX(10px);
+        }
+
+        .project-name {
+            color: #ffff00;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .project-desc {
+            color: #ccc;
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+        }
+
+        .project-link {
+            color: #00ff00;
+            text-decoration: none;
+            font-size: 0.85rem;
+        }
+
+        .project-link:hover {
+            background: #00ff00;
+            color: #000;
+            padding: 2px 4px;
+        }
+
+        @keyframes slideIn {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 30px 0 40px;
+        }
+
+        .contact .section-header {
+            opacity: 0;
+            animation: fadeIn 0.5s 8.5s forwards;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 30px;
+            margin-top: 15px;
+        }
+
+        .social-link {
+            color: #00ff00;
+            text-decoration: none;
+            padding: 8px 16px;
+            border: 1px solid #333;
+            background: #111;
+            transition: all 0.3s ease;
+            opacity: 0;
+            animation: fadeIn 0.5s forwards;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .social-link:nth-child(1) { animation-delay: 9s; }
+        .social-link:nth-child(2) { animation-delay: 9.3s; }
+        .social-link:nth-child(3) { animation-delay: 9.6s; }
+
+        .social-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: #00ff00;
+            transition: left 0.3s ease;
+            z-index: -1;
+        }
+
+        .social-link:hover::before {
+            left: 0;
+        }
+
+        .social-link:hover {
+            color: #000;
+            border-color: #00ff00;
+        }
+
+        /* Matrix Rain Effect */
+        .matrix {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            opacity: 0.1;
+        }
+
+        .matrix-column {
+            position: absolute;
+            top: -100px;
+            font-size: 12px;
+            color: #00ff00;
+            animation: matrixRain linear infinite;
+        }
+
+        @keyframes matrixRain {
+            to {
+                transform: translateY(100vh);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .name { font-size: 2rem; }
+            .title { font-size: 1.2rem; }
+            .social-links { flex-direction: column; gap: 15px; }
+            .container { padding: 15px; }
+            .intro { padding: 40px 0 30px; }
+            .skills-grid { grid-template-columns: 1fr; }
+        }
+
+        /* Command prompt styling */
+        .command {
+            color: #0099ff;
+        }
+
+        .output {
+            color: #ccc;
+            margin-left: 20px;
+        }
+
+        .success {
+            color: #00ff00;
+        }
+
+        .warning {
+            color: #ffff00;
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <h1>Labib Al Faisal</h1>
-        <nav>
-            <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#portfolio">Portfolio</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
+    <!-- Matrix Rain Background -->
+    <div class="matrix" id="matrix"></div>
 
-    <section id="home">
-        <h2>Welcome to My Portfolio</h2>
-        <p>Introduction about yourself.</p>
-    </section>
+    <div class="container">
+        <!-- Terminal Introduction -->
+        <section class="intro">
+            <div class="terminal-line">
+                <span class="prompt">user@portfolio:~$</span> <span class="command">whoami</span>
+            </div>
+            <div class="terminal-line">
+                <div class="name">Your Name</div>
+            </div>
+            <div class="terminal-line">
+                <span class="prompt">user@portfolio:~$</span> <span class="command">cat role.txt</span>
+            </div>
+            <div class="terminal-line">
+                <div class="title">Full Stack Developer</div>
+            </div>
+            <div class="terminal-line">
+                <span class="success">✓ System ready. Welcome to my portfolio.</span>
+            </div>
+        </section>
 
-    <section id="about">
-        <h2>About Me</h2>
-        <p>Details about your background, skills, and interests.</p>
-    </section>
+        <!-- Skills Section -->
+        <section class="skills">
+            <div class="section-header">
+                <span class="prompt">user@portfolio:~$</span> <span class="command">cat skills.json</span>
+            </div>
+            
+            <div class="skills-grid">
 
-    <section id="portfolio">
-        <h2>My Work</h2>
-        <!-- Add your projects here -->
-    </section>
+                
+                <div class="skill-category">
+                    <div class="skill-title">"backend": [</div>
+                    <div class="skill-list">
+                        <span class="skill-item">Node.js</span>
+                        <span class="skill-item">Express.js</span>
+                        <span class="skill-item">Python</span>
+                        <span class="skill-item">RESTful APIs</span>
+                    </div>
+                </div>
+                
+                <div class="skill-category">
+                    <div class="skill-title">"database": [</div>
+                    <div class="skill-list">
+                        <span class="skill-item">MongoDB</span>
+                        <span class="skill-item">PostgreSQL</span>
+                        <span class="skill-item">Redis</span>
+                    </div>
+                </div>
+                
+                <div class="skill-category">
+                    <div class="skill-title">"tools": [</div>
+                    <div class="skill-list">
+                        <span class="skill-item">Git & GitHub</span>
+                        <span class="skill-item">Docker</span>
+                        <span class="skill-item">AWS</span>
+                        <span class="skill-item">VS Code</span>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-    <section id="contact">
-        <h2>Contact Me</h2>
-        <p>Email: <a href="mailto:labibfaisal450@gmail.com">labibfaisal450@gmail.com</a></p>
-    </section>
+        <!-- Projects Section -->
+        <section class="projects">
+            <div class="section-header">
+                <span class="prompt">user@portfolio:~$</span> <span class="command">ls -la projects/</span>
+            </div>
+            
+            <div class="project">
+                <div class="project-name">→ project_one/</div>
+                <div class="project-desc">React web application with Node.js backend</div>
+                <a href="#" class="project-link">[view] [github]</a>
+            </div>
+            
+            <div class="project">
+                <div class="project-name">→ project_two/</div>
+                <div class="project-desc">Mobile app with cross-platform compatibility</div>
+                <a href="#" class="project-link">[view] [github]</a>
+            </div>
+            
+            <div class="project">
+                <div class="project-name">→ project_three/</div>
+                <div class="project-desc">API service with database integration</div>
+                <a href="#" class="project-link">[view] [github]</a>
+            </div>
+        </section>
 
-    <footer>
-        <p>&copy; 2024 Labib Al Faisal</p>
-    </footer>
+        <!-- Contact Section -->
+        <section class="contact">
+            <div class="section-header">
+                <span class="prompt">user@portfolio:~$</span> <span class="command">find . -name "contact*"</span>
+            </div>
+            
+            <div class="social-links">
+                <a href="#" class="social-link">./github</a>
+                <a href="#" class="social-link">./linkedin</a>
+                <a href="#" class="social-link">./resume.pdf</a>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Create matrix rain effect
+        function createMatrix() {
+            const matrix = document.getElementById('matrix');
+            const chars = '01アカサタナハマヤラワガザダバパイキシチニヒミリヰギジヂビピウクスツヌフムユルグズヅブプエケセテネヘメレヱゲゼデベペオコソトノホモヨロヲゴゾドボポヴッン';
+            
+            for (let i = 0; i < 20; i++) {
+                const column = document.createElement('div');
+                column.className = 'matrix-column';
+                column.style.left = Math.random() * 100 + '%';
+                column.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                column.style.animationDelay = Math.random() * 2 + 's';
+                
+                let text = '';
+                for (let j = 0; j < 30; j++) {
+                    text += chars[Math.floor(Math.random() * chars.length)] + '<br>';
+                }
+                column.innerHTML = text;
+                
+                matrix.appendChild(column);
+            }
+        }
+
+        // Initialize matrix effect
+        createMatrix();
+
+        // Add typing sound effect simulation
+        let typingSound = false;
+        document.addEventListener('DOMContentLoaded', () => {
+            // Simulate terminal cursor at the end
+            setTimeout(() => {
+                const cursor = document.createElement('span');
+                cursor.className = 'cursor';
+                document.querySelector('.container').appendChild(cursor);
+            }, 10000);
+        });
+
+        // Add interactive terminal commands
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                // Easter egg: pressing enter shows a terminal prompt
+                console.log('user@portfolio:~$ _');
+            }
+        });
+
+        // Glitch effect on hover for project names
+        document.querySelectorAll('.project-name').forEach(name => {
+            name.addEventListener('mouseenter', () => {
+                const original = name.textContent;
+                const glitched = original.split('').map(char => 
+                    Math.random() > 0.7 ? String.fromCharCode(33 + Math.random() * 94) : char
+                ).join('');
+                
+                name.textContent = glitched;
+                setTimeout(() => {
+                    name.textContent = original;
+                }, 100);
+            });
+        });
+
+        // Add hover effect for skill items
+        document.querySelectorAll('.skill-item').forEach(skill => {
+            skill.addEventListener('mouseenter', () => {
+                skill.style.transform = 'translateX(5px)';
+            });
+            skill.addEventListener('mouseleave', () => {
+                skill.style.transform = 'translateX(0)';
+            });
+        });
+    </script>
 </body>
 </html>
